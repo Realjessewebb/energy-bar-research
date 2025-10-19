@@ -133,7 +133,7 @@ body {
   outline-offset: 2px;
 }
 
-/* Pulse animation */
+/* Pulse animation for Next buttons */
 @keyframes pulse {
   0% {
     background-color: #000000;
@@ -143,6 +143,36 @@ body {
   }
   100% {
     background-color: #000000;
+  }
+}
+
+/* Continue button (green variant) */
+.continue-button {
+  background-color: #90EE90;
+  color: #000000;
+  animation: pulse-green 3s ease-in-out infinite;
+}
+
+.continue-button:hover {
+  background-color: #7CCD7C;
+  animation: none;
+}
+
+.continue-button:active {
+  background-color: #66BB66;
+  animation: none;
+}
+
+/* Pulse animation for Continue button */
+@keyframes pulse-green {
+  0% {
+    background-color: #90EE90;
+  }
+  50% {
+    background-color: #BFFF00;
+  }
+  100% {
+    background-color: #90EE90;
   }
 }
 

@@ -85,6 +85,10 @@ function createProductCard(product, index) {
   card.setAttribute('role', 'article');
   card.setAttribute('aria-label', `${product.name} information card`);
 
+  const isLastCard = index >= state.randomizedProducts.length - 1;
+  const buttonClass = isLastCard ? 'next-button continue-button' : 'next-button';
+  const buttonText = isLastCard ? 'Continue' : 'Next';
+
   card.innerHTML = `
     <div class="card-content">
       <h2>${product.name}</h2>
@@ -93,8 +97,8 @@ function createProductCard(product, index) {
 
       <p class="description">${product.description}</p>
 
-      <button class="next-button" data-index="${index}" aria-label="Next card">
-        ${index < state.randomizedProducts.length - 1 ? 'Next' : 'Continue'}
+      <button class="${buttonClass}" data-index="${index}" aria-label="${buttonText} card">
+        ${buttonText}
       </button>
     </div>
   `;
