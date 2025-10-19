@@ -6,29 +6,26 @@
 // Configuration - Edit product data and form URL here
 const CONFIG = {
   // Single Google Form URL for all products
-  formUrl: 'https://forms.gle/YOUR_FORM_ID', // Replace with actual Google Form URL
+  formUrl: 'https://forms.gle/xKxGNMgCznxfKvjk9',
 
   products: [
     {
       id: 'honey-crunch',
       name: 'Honey Crunch',
-      usp: 'Real honey and wholesome oats for sustained energy throughout your day.',
-      ingredients: 'Oats, Honey, Almonds, Brown Rice Syrup, Sunflower Seeds, Sea Salt',
-      imagePlaceholder: 'Honey Crunch Product Image'
+      description: 'Honey Crunch is a clean, fast-acting source of workout energy made from simple ingredients — raw honey, banana, and air-popped brown rice, with no BS.',
+      image: 'honey crunch.png'
     },
     {
       id: 'rxbar',
       name: 'RXBAR',
-      usp: 'Simple ingredients you can see and pronounce, with no added sugar.',
-      ingredients: 'Egg Whites, Dates, Cashews, Almonds, Natural Flavors',
-      imagePlaceholder: 'RXBAR Product Image'
+      description: 'RXBAR protein bars are made with simple ingredients you can recognize — like egg whites for protein, dates to bind, and nuts for texture.',
+      image: 'rxbar.jpg'
     },
     {
       id: 'clif-bar',
       name: 'Clif Bar',
-      usp: 'Plant-based protein and organic ingredients to fuel your adventures.',
-      ingredients: 'Organic Oats, Organic Brown Rice Syrup, Soy Protein Isolate, Organic Cane Syrup, Organic Cashew Butter',
-      imagePlaceholder: 'Clif Bar Product Image'
+      description: 'CLIF BAR energy bars deliver a blend of plant-based carbs, protein, and fiber for sustained energy — made with organic rolled oats and without high-fructose corn syrup or artificial flavors.',
+      image: 'clif bar.webp'
     }
   ]
 };
@@ -100,16 +97,9 @@ function createProductCard(product, index) {
     <div class="card-content">
       <h2>${product.name}</h2>
 
-      <div class="product-image" role="img" aria-label="${product.imagePlaceholder}">
-        ${product.imagePlaceholder}
-      </div>
+      <img src="${product.image}" alt="${product.name} product" class="product-image">
 
-      <p class="usp">${product.usp}</p>
-
-      <div class="ingredients-section">
-        <h3>Ingredients</h3>
-        <p class="ingredients">${product.ingredients}</p>
-      </div>
+      <p class="description">${product.description}</p>
 
       <button class="next-button" data-index="${index}" aria-label="Next card">
         ${index < state.randomizedProducts.length - 1 ? 'Next' : 'Continue'}
