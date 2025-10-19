@@ -12,13 +12,13 @@ const CONFIG = {
     {
       id: 'honey-crunch',
       name: 'Honey Crunch',
-      description: 'Honey Crunch is a clean, fast-acting source of workout energy made from simple ingredients — raw honey, banana, and air-popped brown rice, with no BS.',
+      description: 'Honey Crunch is a clean, fast-acting source of workout energy made from simple ingredients — raw honey, banana, and air-popped brown rice, with no BS.\n\n',
       image: 'honey-crunch.png'
     },
     {
       id: 'rxbar',
       name: 'RXBAR',
-      description: 'RXBAR protein bars are made with simple ingredients you can recognize — like egg whites for protein, dates to bind, and nuts for texture.',
+      description: 'RXBAR protein bars are made with simple ingredients you can recognize — like egg whites for protein, dates to bind, and nuts for texture.\n\n',
       image: 'rxbar.jpg'
     },
     {
