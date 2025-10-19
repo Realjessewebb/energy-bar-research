@@ -47,9 +47,6 @@ function init() {
   // Render card deck
   renderCardDeck();
 
-  // Set up header hide on scroll
-  setupHeaderCollapse();
-
   console.log('Energy Bar Research initialized');
 }
 
@@ -119,39 +116,6 @@ function showToastAndRedirect() {
   setTimeout(() => {
     window.location.href = CONFIG.formUrl;
   }, 2500);
-}
-
-/* =====================================================
-   Header Collapse on Scroll
-   ===================================================== */
-
-function setupHeaderCollapse() {
-  const header = document.querySelector('.site-header');
-  const cardDeck = document.getElementById('card-deck');
-  let lastScrollLeft = 0;
-
-  // Hide header when user scrolls horizontally through cards
-  cardDeck.addEventListener('scroll', () => {
-    const currentScrollLeft = cardDeck.scrollLeft;
-
-    // If user has scrolled more than 50px from start, hide header
-    if (currentScrollLeft > 50) {
-      header.classList.add('hidden');
-    } else {
-      header.classList.remove('hidden');
-    }
-
-    lastScrollLeft = currentScrollLeft;
-  });
-
-  // Also hide on vertical scroll within individual cards
-  document.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('hidden');
-    } else {
-      header.classList.remove('hidden');
-    }
-  }, true); // Use capture phase to catch all scroll events
 }
 
 /* =====================================================
