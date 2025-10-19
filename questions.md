@@ -1,0 +1,1 @@
+Q1: What bar do you pick? Q2: Why did you choose this bar? Q3: What is your typical routine before working out (e.g., do you eat or avoid certain foods)? Q4: How often do you work out? (days per week)
