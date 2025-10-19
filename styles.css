@@ -177,83 +177,22 @@ body {
   z-index: 100;
 }
 
-/* Compare Screen */
-.compare-screen {
-  padding: 2rem 1rem;
-  max-width: 800px;
-  margin: 0 auto;
-  min-height: calc(100vh - 140px);
-}
-
-.compare-screen h2 {
-  font-size: 1.75rem;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.compare-instructions {
-  text-align: center;
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  color: #333333;
-}
-
-.compare-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Mini Card */
-.mini-card {
-  border: 2px solid #000000;
-  padding: 1.25rem;
-  background-color: #ffffff;
-}
-
-.mini-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.mini-usp {
-  font-size: 0.9375rem;
-  margin-bottom: 0.75rem;
-  color: #333333;
-}
-
-.mini-ingredients {
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
-  color: #555555;
-  line-height: 1.6;
-}
-
-.select-button {
-  width: 100%;
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
-  font-weight: 600;
+/* Toast Message */
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #000000;
   color: #ffffff;
-  border: none;
+  padding: 1.5rem 2rem;
   border-radius: 4px;
-  cursor: pointer;
-  min-height: 56px;
-  transition: background-color 0.2s ease;
-}
-
-.select-button:hover {
-  background-color: #333333;
-}
-
-.select-button:active {
-  background-color: #555555;
-}
-
-.select-button:focus {
-  outline: 3px solid #000000;
-  outline-offset: 2px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-align: center;
+  z-index: 1000;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Utility Classes */
@@ -279,24 +218,8 @@ body {
     font-size: 1.25rem;
   }
 
-  .compare-grid {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .mini-card {
-    flex: 1 1 calc(50% - 1rem);
-    max-width: 350px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .compare-grid {
-    gap: 2rem;
-  }
-
-  .mini-card {
-    flex: 1 1 calc(33.333% - 1.5rem);
+  .toast {
+    font-size: 1.25rem;
+    padding: 2rem 3rem;
   }
 }

@@ -3,15 +3,17 @@
    No frameworks, no external dependencies
    ===================================================== */
 
-// Configuration - Edit product data and form URLs here
+// Configuration - Edit product data and form URL here
 const CONFIG = {
+  // Single Google Form URL for all products
+  formUrl: 'https://forms.gle/YOUR_FORM_ID', // Replace with actual Google Form URL
+
   products: [
     {
       id: 'honey-crunch',
       name: 'Honey Crunch',
       usp: 'Real honey and wholesome oats for sustained energy throughout your day.',
       ingredients: 'Oats, Honey, Almonds, Brown Rice Syrup, Sunflower Seeds, Sea Salt',
-      formUrl: 'https://forms.google.com/honey-crunch-form', // Replace with actual URL
       imagePlaceholder: 'Honey Crunch Product Image'
     },
     {
@@ -19,7 +21,6 @@ const CONFIG = {
       name: 'RXBAR',
       usp: 'Simple ingredients you can see and pronounce, with no added sugar.',
       ingredients: 'Egg Whites, Dates, Cashews, Almonds, Natural Flavors',
-      formUrl: 'https://forms.google.com/rxbar-clif-shared-form', // Replace with actual URL
       imagePlaceholder: 'RXBAR Product Image'
     },
     {
@@ -27,7 +28,6 @@ const CONFIG = {
       name: 'Clif Bar',
       usp: 'Plant-based protein and organic ingredients to fuel your adventures.',
       ingredients: 'Organic Oats, Organic Brown Rice Syrup, Soy Protein Isolate, Organic Cane Syrup, Organic Cashew Butter',
-      formUrl: 'https://forms.google.com/rxbar-clif-shared-form', // Replace with actual URL
       imagePlaceholder: 'Clif Bar Product Image'
     }
   ]
@@ -38,7 +38,7 @@ const state = {
   randomizedProducts: [],
   viewedCards: new Set(), // Track which cards have been viewed (60%+ visible)
   currentCardIndex: 0,
-  compareScreenUnlocked: false
+  allCardsViewed: false
 };
 
 /* =====================================================
@@ -124,44 +124,16 @@ function createProductCard(product, index) {
   return card;
 }
 
-function renderCompareScreen() {
-  const compareScreen = document.getElementById('compare-screen');
-  const compareGrid = document.getElementById('compare-grid');
+function showToastAndRedirect() {
+  const toast = document.getElementById('toast');
 
-  compareGrid.innerHTML = '';
+  // Show toast message
+  toast.classList.remove('hidden');
 
-  // Use same randomized order
-  state.randomizedProducts.forEach(product => {
-    const miniCard = createMiniCard(product);
-    compareGrid.appendChild(miniCard);
-  });
-
-  // Show compare screen, hide card deck and progress
-  document.getElementById('card-deck').classList.add('hidden');
-  document.getElementById('progress-indicator').classList.add('hidden');
-  compareScreen.classList.remove('hidden');
-}
-
-function createMiniCard(product) {
-  const miniCard = document.createElement('div');
-  miniCard.className = 'mini-card';
-  miniCard.setAttribute('role', 'article');
-  miniCard.setAttribute('aria-label', `${product.name} summary`);
-
-  miniCard.innerHTML = `
-    <h3>${product.name}</h3>
-    <p class="mini-usp">${product.usp}</p>
-    <p class="mini-ingredients"><strong>Ingredients:</strong> ${product.ingredients}</p>
-    <button class="select-button" data-product-id="${product.id}" aria-label="Select ${product.name}">
-      Select
-    </button>
-  `;
-
-  // Add click handler to Select button
-  const selectButton = miniCard.querySelector('.select-button');
-  selectButton.addEventListener('click', () => handleSelect(product));
-
-  return miniCard;
+  // Wait 2.5 seconds, then redirect to Google Form
+  setTimeout(() => {
+    window.location.href = CONFIG.formUrl;
+  }, 2500);
 }
 
 /* =====================================================
@@ -186,9 +158,10 @@ function setupScrollTracking() {
             console.log(`Card ${cardIndex} viewed (${state.viewedCards.size}/${state.randomizedProducts.length})`);
 
             // Check if all cards have been viewed
-            if (state.viewedCards.size === state.randomizedProducts.length) {
-              state.compareScreenUnlocked = true;
-              console.log('All cards viewed - Compare screen unlocked');
+            if (state.viewedCards.size === state.randomizedProducts.length && !state.allCardsViewed) {
+              state.allCardsViewed = true;
+              console.log('All cards viewed - triggering redirect');
+              showToastAndRedirect();
             }
           }
 
@@ -215,7 +188,6 @@ function setupScrollTracking() {
    ===================================================== */
 
 function handleNextButton(currentIndex) {
-  const cardDeck = document.getElementById('card-deck');
   const nextIndex = currentIndex + 1;
 
   // If there's a next card, scroll to it
@@ -223,21 +195,11 @@ function handleNextButton(currentIndex) {
     const nextCard = document.getElementById(`card-${nextIndex}`);
     nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
-    // Last card - check if compare screen should be shown
-    if (state.compareScreenUnlocked) {
-      renderCompareScreen();
-    } else {
-      // Not all cards viewed yet - alert user
+    // Last card - check if all cards have been viewed
+    if (!state.allCardsViewed) {
       alert('Please view all energy bars before continuing. Swipe through all cards.');
     }
   }
-}
-
-function handleSelect(product) {
-  console.log(`User selected: ${product.name}`);
-
-  // Redirect to form URL in same tab
-  window.location.href = product.formUrl;
 }
 
 /* =====================================================

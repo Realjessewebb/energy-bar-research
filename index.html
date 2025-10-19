@@ -11,7 +11,7 @@
   <!-- Header -->
   <header class="site-header">
     <h1>Energy Bar Research</h1>
-    <p class="subtitle">Compare energy bar options</p>
+    <p class="subtitle">Swipe through all three bars to view their USP and ingredients.</p>
   </header>
 
   <!-- Main content container -->
@@ -21,14 +21,10 @@
       <!-- Cards injected by JavaScript -->
     </section>
 
-    <!-- Compare & Choose screen (hidden initially) -->
-    <section id="compare-screen" class="compare-screen hidden" role="region" aria-label="Compare and choose">
-      <h2>Compare & Choose</h2>
-      <p class="compare-instructions">Select the energy bar you'd like to learn more about</p>
-      <div id="compare-grid" class="compare-grid">
-        <!-- Mini-cards injected by JavaScript -->
-      </div>
-    </section>
+    <!-- Toast message (hidden initially) -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite">
+      Thanks — redirecting to the short survey…
+    </div>
   </main>
 
   <!-- Progress indicator -->
