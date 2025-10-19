@@ -33,9 +33,7 @@ const CONFIG = {
 // Application State
 const state = {
   randomizedProducts: [],
-  viewedCards: new Set(), // Track which cards have been viewed (60%+ visible)
-  currentCardIndex: 0,
-  allCardsViewed: false
+  currentCardIndex: 0
 };
 
 /* =====================================================
@@ -49,7 +47,7 @@ function init() {
   // Render card deck
   renderCardDeck();
 
-  // Set up scroll tracking for view-all enforcement
+  // Set up scroll tracking for progress indicator
   setupScrollTracking();
 
   // Update progress indicator
@@ -127,13 +125,11 @@ function showToastAndRedirect() {
 }
 
 /* =====================================================
-   Scroll Tracking & View-All Enforcement
+   Scroll Tracking for Progress Indicator
    ===================================================== */
 
 function setupScrollTracking() {
-  const cardDeck = document.getElementById('card-deck');
-
-  // Use Intersection Observer for precise visibility tracking
+  // Use Intersection Observer to track current card for progress indicator
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
@@ -141,19 +137,6 @@ function setupScrollTracking() {
         if (entry.intersectionRatio >= 0.6) {
           const cardId = entry.target.id;
           const cardIndex = parseInt(cardId.split('-')[1]);
-
-          // Mark card as viewed
-          if (!state.viewedCards.has(cardIndex)) {
-            state.viewedCards.add(cardIndex);
-            console.log(`Card ${cardIndex} viewed (${state.viewedCards.size}/${state.randomizedProducts.length})`);
-
-            // Check if all cards have been viewed
-            if (state.viewedCards.size === state.randomizedProducts.length && !state.allCardsViewed) {
-              state.allCardsViewed = true;
-              console.log('All cards viewed - triggering redirect');
-              showToastAndRedirect();
-            }
-          }
 
           // Update current card index for progress indicator
           state.currentCardIndex = cardIndex;
@@ -185,10 +168,9 @@ function handleNextButton(currentIndex) {
     const nextCard = document.getElementById(`card-${nextIndex}`);
     nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
-    // Last card - check if all cards have been viewed
-    if (!state.allCardsViewed) {
-      alert('Please view all energy bars before continuing. Swipe through all cards.');
-    }
+    // Last card - show toast and redirect to form
+    console.log('Third "Next" button clicked - triggering redirect');
+    showToastAndRedirect();
   }
 }
 
