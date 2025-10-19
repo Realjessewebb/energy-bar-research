@@ -117,20 +117,35 @@ body {
   cursor: pointer;
   text-align: center;
   min-height: 56px; /* Large tap target */
-  transition: background-color 0.2s ease;
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .next-button:hover {
   background-color: #333333;
+  animation: none;
 }
 
 .next-button:active {
   background-color: #555555;
+  animation: none;
 }
 
 .next-button:focus {
   outline: 3px solid #000000;
   outline-offset: 2px;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    background-color: #000000;
+  }
+  50% {
+    background-color: #666666;
+  }
+  100% {
+    background-color: #000000;
+  }
 }
 
 /* Toast Message */
