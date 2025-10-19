@@ -27,9 +27,20 @@ body {
 
 /* Header */
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   text-align: center;
   padding: 1.5rem 1rem 1rem;
   border-bottom: 2px solid #000000;
+  background-color: #ffffff;
+  z-index: 50;
+  transition: transform 0.3s ease;
+}
+
+.site-header.hidden {
+  transform: translateY(-100%);
 }
 
 .site-header h1 {
@@ -48,6 +59,7 @@ body {
   flex: 1;
   position: relative;
   overflow: hidden;
+  margin-top: 80px; /* Account for fixed header */
 }
 
 /* Card Deck - Horizontal Scroll Snap */
@@ -56,7 +68,7 @@ body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  height: calc(100vh - 140px); /* Account for header + progress */
+  height: calc(100vh - 80px); /* Account for header */
   scroll-behavior: smooth;
 }
 
@@ -144,21 +156,6 @@ body {
 .next-button:focus {
   outline: 3px solid #000000;
   outline-offset: 2px;
-}
-
-/* Progress Indicator */
-.progress-indicator {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #000000;
-  color: #ffffff;
-  text-align: center;
-  padding: 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  z-index: 100;
 }
 
 /* Toast Message */

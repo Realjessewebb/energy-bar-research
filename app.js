@@ -47,11 +47,8 @@ function init() {
   // Render card deck
   renderCardDeck();
 
-  // Set up scroll tracking for progress indicator
-  setupScrollTracking();
-
-  // Update progress indicator
-  updateProgress();
+  // Set up header hide on scroll
+  setupHeaderCollapse();
 
   console.log('Energy Bar Research initialized');
 }
@@ -125,35 +122,36 @@ function showToastAndRedirect() {
 }
 
 /* =====================================================
-   Scroll Tracking for Progress Indicator
+   Header Collapse on Scroll
    ===================================================== */
 
-function setupScrollTracking() {
-  // Use Intersection Observer to track current card for progress indicator
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        // Check if card is at least 60% visible
-        if (entry.intersectionRatio >= 0.6) {
-          const cardId = entry.target.id;
-          const cardIndex = parseInt(cardId.split('-')[1]);
+function setupHeaderCollapse() {
+  const header = document.querySelector('.site-header');
+  const cardDeck = document.getElementById('card-deck');
+  let lastScrollLeft = 0;
 
-          // Update current card index for progress indicator
-          state.currentCardIndex = cardIndex;
-          updateProgress();
-        }
-      });
-    },
-    {
-      threshold: [0.6], // Trigger when 60% visible
-      root: null
+  // Hide header when user scrolls horizontally through cards
+  cardDeck.addEventListener('scroll', () => {
+    const currentScrollLeft = cardDeck.scrollLeft;
+
+    // If user has scrolled more than 50px from start, hide header
+    if (currentScrollLeft > 50) {
+      header.classList.add('hidden');
+    } else {
+      header.classList.remove('hidden');
     }
-  );
 
-  // Observe all cards
-  document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
+    lastScrollLeft = currentScrollLeft;
   });
+
+  // Also hide on vertical scroll within individual cards
+  document.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header.classList.add('hidden');
+    } else {
+      header.classList.remove('hidden');
+    }
+  }, true); // Use capture phase to catch all scroll events
 }
 
 /* =====================================================
@@ -172,18 +170,6 @@ function handleNextButton(currentIndex) {
     console.log('Third "Next" button clicked - triggering redirect');
     showToastAndRedirect();
   }
-}
-
-/* =====================================================
-   UI Updates
-   ===================================================== */
-
-function updateProgress() {
-  const currentCardElement = document.getElementById('current-card');
-  const totalCardsElement = document.getElementById('total-cards');
-
-  currentCardElement.textContent = state.currentCardIndex + 1;
-  totalCardsElement.textContent = state.randomizedProducts.length;
 }
 
 /* =====================================================
