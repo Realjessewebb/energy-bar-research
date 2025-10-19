@@ -122,10 +122,10 @@ function showToastAndRedirect() {
   // Show toast message
   toast.classList.remove('hidden');
 
-  // Wait 2.5 seconds, then redirect to Google Form
+  // Wait 1 second, then redirect to Google Form
   setTimeout(() => {
     window.location.href = CONFIG.formUrl;
-  }, 2500);
+  }, 1000);
 }
 
 /* =====================================================
