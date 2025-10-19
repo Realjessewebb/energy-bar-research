@@ -13,7 +13,7 @@ const CONFIG = {
       id: 'honey-crunch',
       name: 'Honey Crunch',
       description: 'Honey Crunch is a clean, fast-acting source of workout energy made from simple ingredients — raw honey, banana, and air-popped brown rice, with no BS.',
-      image: 'honey crunch.png'
+      image: 'honey%20crunch.png'
     },
     {
       id: 'rxbar',
@@ -25,7 +25,7 @@ const CONFIG = {
       id: 'clif-bar',
       name: 'Clif Bar',
       description: 'CLIF BAR energy bars deliver a blend of plant-based carbs, protein, and fiber for sustained energy — made with organic rolled oats and without high-fructose corn syrup or artificial flavors.',
-      image: 'clif bar.webp'
+      image: 'clif%20bar.webp'
     }
   ]
 };
