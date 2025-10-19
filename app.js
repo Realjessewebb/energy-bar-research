@@ -12,8 +12,8 @@ const CONFIG = {
     {
       id: 'honey-krunch',
       name: 'Honey Krunch',
-      description: 'Honey Krunch is a clean, fast-acting source of workout energy made from simple ingredients — raw honey, banana, air-popped brown rice, and gelatin. Same carbs, less sugar, with no BS.',
-      image: 'honey-crunch.png'
+      description: 'Honey Krunch is a clean, fast-acting source of workout energy made from simple ingredients — raw honey, banana, air-popped brown rice, and gelatin. Same carbs, no added sugar, with no BS.',
+      image: 'honey-crunch-3.png'
     },
     {
       id: 'rxbar',
